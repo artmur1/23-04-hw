@@ -38,7 +38,39 @@
 
 ## Решение 1. Yandex Cloud
 
+1. Настроил с помощью Terraform кластер баз данных MySQL.
 
+main.tf - https://github.com/artmur1/23-04-hw/blob/main/files/main.tf
+
+locals.tf - https://github.com/artmur1/23-04-hw/blob/main/files/locals.tf
+
+variables.tf - https://github.com/artmur1/23-04-hw/blob/main/files/variables.tf
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-01-01.png)
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-01-02.png)
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-01-03.png)
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-01-04.png)
+
+2. Настроил с помощью Terraform кластер Kubernetes.
+
+main.tf - https://github.com/artmur1/23-04-hw/blob/main/files/k8s_cluster/main.tf
+
+locals.tf - https://github.com/artmur1/23-04-hw/blob/main/files/k8s_cluster/locals.tf
+
+variables.tf - https://github.com/artmur1/23-04-hw/blob/main/files/k8s_cluster/variables.tf
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-02-01.png)
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-02-02.png)
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-02-03.png)
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-02-04.png)
+
+В main.tf указал в группе узлов указал три машины с автомасштабированием до шести, но в течение 1 часа они так и не поднялись. Хотя ошибок не было. Яндекс клауд сам обрывает процесс, который длится больше часа.
 
 --- 
 ## Задание 2*. Вариант с AWS (задание со звёздочкой)

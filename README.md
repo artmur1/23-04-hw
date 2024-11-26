@@ -72,6 +72,33 @@ variables.tf - https://github.com/artmur1/23-04-hw/blob/main/files/k8s_cluster/v
 
 В main.tf указал в группе узлов указал три машины с автомасштабированием до шести, но в течение 1 часа они так и не поднялись. Хотя ошибок не было. Яндекс клауд сам обрывает процесс, который длится больше часа.
 
+## Продолжение решения 2 (доработка).
+
+Внес исправления в конфигурационные файлы - кластер с группой узлов поднялись! Установил kubectl:
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-02-05.png)
+
+Чтобы получить учетные данные для подключения к публичному IP-адресу кластера через интернет, выполнил команду:
+
+    yc managed-kubernetes cluster \
+       get-credentials name2 \
+       --external
+
+    kubectl cluster-info
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-02-06.png)
+
+    kubectl cluster-info dump
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-02-07.png)
+
+Получилось подключиться к кластеру:
+
+    kubectl get svc
+    kubectl get nodes
+
+![](https://github.com/artmur1/23-04-hw/blob/main/img/23-4-02-08.png)
+
 --- 
 ## Задание 2*. Вариант с AWS (задание со звёздочкой)
 

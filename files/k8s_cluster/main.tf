@@ -15,7 +15,7 @@ resource "yandex_kubernetes_cluster" "regional_cluster_resource_name" {
     master_location {
       zone      = yandex_vpc_subnet.public-a.zone
       subnet_id = yandex_vpc_subnet.public-a.id
-    }
+   }
     master_location {
       zone      = yandex_vpc_subnet.public-b.zone
       subnet_id = yandex_vpc_subnet.public-b.id
@@ -33,10 +33,10 @@ resource "yandex_kubernetes_cluster" "regional_cluster_resource_name" {
     maintenance_policy {
       auto_upgrade = true
 
-      maintenance_window {
-        start_time = "15:00"
-        duration   = "3h"
-      }
+#      maintenance_window {
+#        start_time = "15:00"
+#        duration   = "3h"
+#      }
     }
 
     master_logging {
@@ -126,17 +126,18 @@ resource "yandex_kubernetes_node_group" "k8s-ng" {
     network_acceleration_type = "standard"
     network_interface {
       nat        = true
-      subnet_ids = ["${yandex_vpc_subnet.public-a.id}"]
+      subnet_ids = ["${yandex_vpc_subnet.public-b.id}"]
     }
 
     resources {
       memory = 2
       cores  = 2
+      core_fraction = 20
     }
 
     boot_disk {
       type = "network-hdd"
-      size = 20
+      size = 50
     }
 
     scheduling_policy {
@@ -146,6 +147,11 @@ resource "yandex_kubernetes_node_group" "k8s-ng" {
     container_runtime {
       type = "containerd"
     }
+
+    metadata = {
+      user-data = "${file("./meta.yml")}"
+    }
+
   }
 
   scale_policy {
@@ -158,7 +164,7 @@ resource "yandex_kubernetes_node_group" "k8s-ng" {
 
   allocation_policy {
     location {
-      zone = "ru-central1-a"
+      zone = "ru-central1-b"
     }
   }
 
